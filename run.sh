@@ -6,7 +6,7 @@ clear
 echo "Running the ecosystem ..."
 
 echo "Running RabbitMQ"
-docker run -d --hostname my-rabbit --name rabbitmq rabbitmq:3-management
+docker run -d -p 15672:15672 --hostname my-rabbit --name rabbitmq rabbitmq:3-management
 sleep 10
 echo "Visit the RabbitMQ Manager web  -->  http://localhost:15672"
 
