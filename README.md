@@ -34,7 +34,7 @@ $ docker build -t resources-web ./resources-web
 $ docker run -d --link=rabbitmq -p 8888:8888 --name resources-web resources-web
 ```
 
-And visit **http://localhost:8888**
+And visit [http://localhost:8888][web]
 
 
 
@@ -42,4 +42,5 @@ And visit **http://localhost:8888**
 [resources-analyzer]:<https://github.com/mendrugory/reactive-architecture-python/tree/master/resources-analyzer>
 [resources-web]:<https://github.com/mendrugory/reactive-architecture-python/tree/master/resources-web>
 [docker]:<https://docs.docker.com/engine/installation/>
+[web]:<http://localhost:8888>
 
