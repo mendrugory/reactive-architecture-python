@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html ng-app="app">
+
+<head>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0/angular.min.js"></script>
+</head>
+
+<body ng-controller="controller">
+<script>
+    var app = angular.module('app', []);
+    app.controller('controller',
+            function ($scope) {
+                $scope.result = {};
+                $scope.result.machine = "--";
+                $scope.result.cpu_result = "--";
+
+                var ws = new WebSocket('ws://localhost:8888/ws');
+
+                ws.onmessage = function (ev) {
+
+                    var result = JSON.parse(ev.data);
+                    $scope.result.machine = result.machine;
+                    $scope.result.cpu_result = result.cpu_result;
+                    console.log(result.machine + ": " + result.cpu_result);
+                    $scope.$apply();
+                };
+            });
+
+</script>
+<div>
+	<h1>A simple PoC of a Reactive Architecture with Python, RabbitMQ & AngularJS</h1>
+      <p>The usage of the CPU of the machine {{!result.machine}} is {{!result.cpu_result}} </p>
+</div>
+</body>
+</html>
