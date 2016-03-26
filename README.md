@@ -1,5 +1,5 @@
 # Reactive Architecture
-A very simple proof of concept where we try to build a reactive architecture using Python, RabbitMQ and AngularJS.
+A very simple proof of concept where I try to build a reactive architecture using Python, RabbitMQ and AngularJS.
 
 The PoC is composed of three projects or modules. The behaviour of the entire system tries to be asynchronous. No data is requested between the modules and getting the information as soon as it is ready:
 
@@ -13,7 +13,7 @@ I highly recommend to run them using the given script. You have to have [Docker]
 $ ./run.sh
 ```
 
-Or all the containers from the project folder:
+Or all the containers from the main repository folder:
 
 ```
 $ docker run -d --hostname my-rabbit --name rabbitmq rabbitmq:3-management
