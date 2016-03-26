@@ -34,6 +34,8 @@ $ docker build -t resources-web ./resources-web
 $ docker run -d --link=rabbitmq -p 8888:8888 --name resources-web resources-web
 ```
 
+And visit **http://localhost:8888**
+
 
 
 [resources-tracker]:<https://github.com/mendrugory/reactive-architecture-python/tree/master/resources-tracker>
