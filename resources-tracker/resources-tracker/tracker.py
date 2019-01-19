@@ -7,6 +7,8 @@ import json
 import socket
 import settings
 
+time.sleep(20)
+
 SLEEP_TIME = 0.5  # seconds
 
 connection = pika.BlockingConnection(pika.ConnectionParameters(

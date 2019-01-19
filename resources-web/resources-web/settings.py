@@ -1,9 +1,11 @@
-import logging
+import logging, sys
 
 # Logger
-logging.basicConfig(filename='web.log',
-                    format='%(asctime)s - %(name)s -  %(module)s - %(levelname)s - %(message)s',
-                    level=logging.INFO)
+handler = logging.StreamHandler(sys.stdout)
+handler.setFormatter(logging.Formatter('%(asctime)s - %(name)s - %(module)s - %(levelname)s - %(message)s'))
+logger = logging.getLogger()
+logger.addHandler(handler)
+logger.setLevel(logging.INFO)
 
 RABBITMQ_HOST = 'rabbitmq'
 RABBITMQ_EXCHANGE = 'my_exchange'

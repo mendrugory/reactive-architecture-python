@@ -6,6 +6,9 @@ from tornado import web, websocket, ioloop
 import settings
 import logging
 import uuid
+import time
+
+time.sleep(20)
 
 
 class RabbitMQ:

@@ -2,6 +2,9 @@
 import pika
 import json
 import settings
+import time
+
+time.sleep(20)
 
 
 connection = pika.BlockingConnection(pika.ConnectionParameters(host=settings.RABBITMQ_HOST))
