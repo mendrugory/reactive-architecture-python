@@ -1,2 +1,2 @@
-psutil==4.1.0
-pika==0.10.0
+psutil>=5.8.0
+pika>=1.2.0

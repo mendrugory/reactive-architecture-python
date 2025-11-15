@@ -1,10 +1,8 @@
 # Initial Image
-FROM ubuntu:14.04
+FROM python:3.9-slim
 
 # Dependencies
-RUN apt-get upgrade
-RUN apt-get update
-RUN apt-get install python3-pip -y
+RUN apt-get update && apt-get upgrade -y
 
 # Create folders
 RUN mkdir -p /opt/reactive-architecture/resources-analyzer
@@ -18,5 +16,4 @@ RUN chmod +x /opt/reactive-architecture/resources-analyzer/analyzer.py
 # Installing dependencies
 RUN pip3 install -r /opt/reactive-architecture/resources-analyzer/requirements.txt
 
-
-CMD /opt/reactive-architecture/resources-analyzer/analyzer.py
+CMD ["python3", "/opt/reactive-architecture/resources-analyzer/analyzer.py"]

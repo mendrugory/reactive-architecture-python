@@ -26,11 +26,13 @@ class RabbitMQ:
             return
         self.connecting = True
         param = pika.ConnectionParameters(host=settings.RABBITMQ_HOST)
-        self.connection = pika.adapters.tornado_connection.TornadoConnection(
+        # Use SelectConnection with custom IOLoop from Tornado
+        self.connection = pika.SelectConnection(
             param,
             on_open_callback=self.on_connected,
             on_open_error_callback=self.on_connection_error,
-            on_close_callback=self.close)
+            on_close_callback=self.close,
+            custom_ioloop=ioloop.IOLoop.current())
 
     def add_on_connection_close_callback(self):
         """This method adds an on close callback that will be invoked by pika
@@ -44,7 +46,7 @@ class RabbitMQ:
         self.connecting = False
         self.connection = connection
         self.add_on_connection_close_callback()
-        self.connection.channel(self.on_channel_open)
+        self.connection.channel(on_open_callback=self.on_channel_open)
 
     def on_connection_error(self, method, message):
         logging.error("Method: {}\n Message: {}".format(method, message))
@@ -70,11 +72,12 @@ class RabbitMQ:
                                 callback=self.on_queue_bound)
 
     def on_queue_bound(self, frame):
-        self.channel.basic_consume(consumer_callback=self.func,
-                                   queue=self.queue_name,
-                                   no_ack=True)
+        self.channel.basic_consume(
+            queue=self.queue_name,
+            on_message_callback=self.func,
+            auto_ack=True)
 
-    def close(self):
+    def close(self, connection=None, reason=None):
         if self.channel and self.channel.is_open:
             self.channel.close()
         if self.connection and self.connection.is_open:

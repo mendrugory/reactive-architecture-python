@@ -12,7 +12,7 @@ channel = connection.channel()
 channel.exchange_declare(exchange=settings.RABBITMQ_EXCHANGE,
                              exchange_type=settings.RABBITMQ_EXCHANGE_TYPE)
 
-result = channel.queue_declare(exclusive=True)
+result = channel.queue_declare(queue='', exclusive=True)
 queue_name = result.method.queue
 
 channel.queue_bind(exchange=settings.RABBITMQ_EXCHANGE,
@@ -43,7 +43,7 @@ def analyze(percentage):
         result = 'HIGH'
     return result
 
-channel.basic_consume(callback, queue=queue_name, no_ack=True)
+channel.basic_consume(queue=queue_name, on_message_callback=callback, auto_ack=True)
 
 channel.start_consuming()
 
